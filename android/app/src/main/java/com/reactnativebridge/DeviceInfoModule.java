@@ -4,6 +4,7 @@ import android.os.Build;
 
 import androidx.annotation.NonNull;
 
+import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
@@ -22,7 +23,8 @@ public class DeviceInfoModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod(isBlockingSynchronousMethod = true)
-    public String getDeviceSerialName() {
-        return Build.SERIAL;
+    public void getDeviceSerialName(Callback callback) {
+        String serialName=Build.SERIAL;
+        callback.invoke(serialName);
     }
 }

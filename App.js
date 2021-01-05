@@ -32,9 +32,10 @@ const App = () => {
   const [deviceSerialName, setDeviceSerialName] = useState('');
   const showToast = () => {
     ToastModule.showToast('This toast is from Android');
-    const value = DeviceInfoModule.getDeviceSerialName();
-    console.log(value);
-    setDeviceSerialName(value);
+    DeviceInfoModule.getDeviceSerialName((serial) => {
+      console.log(serial);
+      setDeviceSerialName(serial);
+    });
   };
   return (
     <>
