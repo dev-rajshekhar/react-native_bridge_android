@@ -9,28 +9,22 @@
 import React, {useState} from 'react';
 import {
   SafeAreaView,
-  StyleSheet,
-  ScrollView,
   View,
   Text,
-  Button,
   StatusBar,
+  Button,
+  TouchableOpacity,
 } from 'react-native';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-import {NativeModules} from 'react-native';
+import {NativeModules, requireNativeComponent} from 'react-native';
 const {ToastModule, DeviceInfoModule} = NativeModules;
+
+const GradientView = requireNativeComponent('GradientView');
 
 const App = () => {
   const [deviceSerialName, setDeviceSerialName] = useState('');
   const showToast = () => {
+    console.log('===showToast');
     ToastModule.showToast('This toast is from Android');
     DeviceInfoModule.getDeviceSerialName((serial) => {
       console.log(serial);
@@ -41,55 +35,37 @@ const App = () => {
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
-        <Text>Serial Name:{deviceSerialName}</Text>
-        <Button
-          title="Fetch Device Info"
-          onPress={() => {
-            showToast();
-          }}
-        />
+        <GradientView style={{flex: 1}} fromColor="#5f2c82" toColor="#49a09d" />
+        <View
+          style={{
+            flex: 1,
+            marginVertical: 10,
+            width: '100%',
+            position: 'absolute',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+          <Text>Serial Name:{deviceSerialName}</Text>
+
+          <TouchableOpacity
+            style={{
+              width: 240,
+              height: 45,
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginVertical: 10,
+              backgroundColor: '#EC6F66',
+            }}
+            title="HI"
+            onPress={() => {
+              showToast();
+            }}>
+            <Text style={{color: 'white'}}>Hello</Text>
+          </TouchableOpacity>
+        </View>
       </SafeAreaView>
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
-});
 
 export default App;

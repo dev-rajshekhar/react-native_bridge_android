@@ -15,6 +15,7 @@ public class ToastModule extends ReactContextBaseJavaModule {
     public ToastModule(ReactApplicationContext reactContext) {
         super(reactContext);
     }
+
     @NonNull
     @Override
     public String getName() {
@@ -24,7 +25,7 @@ public class ToastModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void showToast(String message) {
 
-        Toast.makeText(getReactApplicationContext(),message,Toast.LENGTH_LONG).show();
+        Toast.makeText(getReactApplicationContext(), message, Toast.LENGTH_LONG).show();
     }
 
     @ReactMethod
